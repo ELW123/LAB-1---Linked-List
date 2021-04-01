@@ -22,7 +22,8 @@ void printMenu(PlaylistNode& playlist, string name) {
 	string playlistName;
 	string playlistArtistName;
 	int playlistSongLength;
-	
+	int positionOld;
+	int positionNew;
 	string removedID;
 
 	printMenuChoices(name);
@@ -56,7 +57,7 @@ void printMenu(PlaylistNode& playlist, string name) {
 			cin >> playlistSongLength;
 			cout << playlistSongLength << endl;
 
-			// create new playlistNode and use insertAfter function (double check!)
+			// double check here!
 			PlaylistNode* addition = new PlaylistNode(playlistUniqueID, playlistName, playlistArtistName, playlistSongLength);
 			playlist.InsertAfter(addition);
 			printMenuChoices(name);
@@ -74,6 +75,38 @@ void printMenu(PlaylistNode& playlist, string name) {
 
 			printMenuChoices(name);
 			continue;
+		}
+
+		if (userInput == "c") {
+			cout << "CHANGE POSITION OF SONG" << endl 
+                 << "Enter song's current position: " << endl;
+
+			cin.clear();
+            cin.ignore(1);
+			cin >> positionOld;
+			cout << positionOld << endl;
+
+			cout << "Enter new position for song: " << endl;
+			cin >> positionNew;
+			cout << positionNew << endl;
+
+			// do some change position stuff here later
+		}
+
+		if (userInput == "s") {
+			cout << "OUTPUT SONGS BY SPECIFIC ARTIST" << endl 
+                 << "Enter artist's name: " << endl;
+
+			cin.clear();
+            cin.ignore(1);
+			getline(std::cin, playlistArtistName);
+			cout << playlistArtistName;
+
+			PlaylistNode* currObj = &playlist;
+			while (currObj != nullptr) {
+      			currObj->PrintPlaylistNode();
+      			currObj = currObj->GetNext();
+   			}
 		}
 
 		// need to implement printing the other nodes and situation where playlist is empty
