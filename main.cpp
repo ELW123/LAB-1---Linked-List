@@ -15,7 +15,7 @@ void printMenuChoices(string name) {
       << endl;
 }
 
-void printMenu(PlaylistNode& playlist, string name) {
+void printMenu(string name) {
 	// variables here to show user input and all other necessary changes (to be filled in further)
 	string userInput;
 	string playlistUniqueID;
@@ -26,11 +26,14 @@ void printMenu(PlaylistNode& playlist, string name) {
 	int positionNew;
 	string removedID;
 
+	PlaylistNode* playlist = new PlaylistNode;
+	playlist = nullptr;
+
 	printMenuChoices(name);
 
 	while (1) {
 		userInput.clear();
-    	cout << "Choose an option: " << endl;
+    	cout << "Choose an option:" << endl;
     	cin >> userInput;
 
     	if (userInput == "q") break;
@@ -59,7 +62,7 @@ void printMenu(PlaylistNode& playlist, string name) {
 
 			// double check here!
 			PlaylistNode* addition = new PlaylistNode(playlistUniqueID, playlistName, playlistArtistName, playlistSongLength);
-			playlist.InsertAfter(addition);
+			playlist->InsertAfter(addition);
 			printMenuChoices(name);
 			continue;
 		}
@@ -102,7 +105,7 @@ void printMenu(PlaylistNode& playlist, string name) {
 			getline(std::cin, playlistArtistName);
 			cout << playlistArtistName;
 
-			PlaylistNode* currObj = &playlist;
+			PlaylistNode* currObj = playlist;
 			while (currObj != nullptr) {
 				if (currObj->GetArtistName() == playlistArtistName)
       				currObj->PrintPlaylistNode();
@@ -117,7 +120,7 @@ void printMenu(PlaylistNode& playlist, string name) {
 		// need to implement printing the other nodes and situation where playlist is empty
 		if (userInput == "o") {
 			cout << endl << name << "- OUTPUT FULL PLAYLIST" << endl;
-			playlist.PrintPlaylistNode();
+			playlist->PrintPlaylistNode();
 
 			printMenuChoices(name);
 			continue;
@@ -128,9 +131,10 @@ void printMenu(PlaylistNode& playlist, string name) {
 int main() {
 	
 	string title;
-	cout << "Enter playlist's title:" << endl;
-	cin >> title;
-	cout << title;
+	cout << "Enter playlist's title:" << endl << endl;
+	cin.clear();
+	getline(std::cin, title);
 
+	printMenu(title);
     return 0;
 }
