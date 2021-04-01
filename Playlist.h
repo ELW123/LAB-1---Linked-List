@@ -4,12 +4,10 @@
 #include <iostream>
 using namespace std;
 
-class Playlist {
+class PlaylistNode {
  public:
-    // constructors to be added
 
-    // Public member functions
-    /*
+	PlaylistNode( string ID = "none", string song = "none", string artist = "none", int slength = 0, PlaylistNode* nextPtr = 0);
     InsertAfter();
     SetNext();
     GetID();
@@ -17,15 +15,15 @@ class Playlist {
     GetArtistName();
     GetSongLength();
     GetNext();
-    string PrintPlaylistNode();
-    */
+    PrintPlaylistNode();
+    
 
  private:
     string uniqueID;
     string songName;
     string artistName;
     int songLength;
-    //PlaylistNode* nextNodePtr;
+    PlaylistNode* nextNodePtr;
 };
 
 #endif
