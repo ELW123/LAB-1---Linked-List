@@ -38,8 +38,10 @@ void printMenu(string name) {
 
     	if (userInput == "q") break;
 
-		if (userInput != "a" && userInput != "d" && userInput != "c" && userInput != "i" && userInput != "o") continue;
-        
+		if (userInput != "a" && userInput != "d" && userInput != "c" && userInput != "i" && userInput != "o") {
+			continue;
+		}
+		
 		if (userInput == "a") {
 			cout << endl << "ADD SONG" << endl
 				 << "Enter song's unique ID: " << endl;
