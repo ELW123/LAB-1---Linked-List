@@ -104,9 +104,14 @@ void printMenu(PlaylistNode& playlist, string name) {
 
 			PlaylistNode* currObj = &playlist;
 			while (currObj != nullptr) {
-      			currObj->PrintPlaylistNode();
+				if (currObj->GetArtistName() == playlistArtistName)
+      				currObj->PrintPlaylistNode();
+
       			currObj = currObj->GetNext();
    			}
+			
+			printMenuChoices(name);
+			continue;
 		}
 
 		// need to implement printing the other nodes and situation where playlist is empty
