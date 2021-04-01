@@ -126,7 +126,7 @@ void printMenu(string name) {
 			if (playlist != nullptr) 
 				playlist->PrintPlaylistNode();
 			else
-				cout << "Playlist is empty" << endl;
+				cout << "Playlist is empty" << endl << endl;
 
 			printMenuChoices(name);
 			continue;
