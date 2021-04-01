@@ -41,7 +41,7 @@ void printMenu(string name) {
 		if (userInput != "a" && userInput != "d" && userInput != "c" && userInput != "i" && userInput != "o") {
 			continue;
 		}
-		
+        
 		if (userInput == "a") {
 			cout << endl << "ADD SONG" << endl
 				 << "Enter song's unique ID: " << endl;
@@ -122,7 +122,11 @@ void printMenu(string name) {
 		// need to implement printing the other nodes and situation where playlist is empty
 		if (userInput == "o") {
 			cout << endl << name << "- OUTPUT FULL PLAYLIST" << endl;
-			playlist->PrintPlaylistNode();
+			
+			if (playlist != nullptr) 
+				playlist->PrintPlaylistNode();
+			else
+				cout << "Playlist is empty" << endl;
 
 			printMenuChoices(name);
 			continue;
