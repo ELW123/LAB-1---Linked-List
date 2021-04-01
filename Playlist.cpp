@@ -54,6 +54,8 @@ int PlaylistNode::GetSongLength() const{
    return songLength;
 }
 
+// I think (not confirmed) this should be in main.cpp based on some prior experience
+/*
 void PlaylistNode :: PrintMenu(string t){
 	
 	char c; 
@@ -94,4 +96,5 @@ void PlaylistNode :: PrintMenu(string t){
 	}
 	
 }
+*/
     
