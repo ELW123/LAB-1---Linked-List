@@ -15,15 +15,11 @@ PlaylistNode :: PlaylistNode( string ID, string song, string artist, int slength
 
 
 
-void PlaylistNode::InsertAfter(IntNode* nodeLoc) {
+void PlaylistNode::InsertAfter(PlaylistNode* nodeLoc) {
    PlaylistNode* tmpNext = nullptr;
    tmpNext = this->nextNodePtr;    
    this->nextNodePtr = nodeLoc;    
    nodeLoc->nextNodePtr = tmpNext; 
-}
-
-PlaylistNode* PlaylistNode::GetNext() {
-   return this->nextNodePtr;
 }
 
 void PlaylistNode:: PrintPlaylistNode() {
@@ -33,10 +29,28 @@ void PlaylistNode:: PrintPlaylistNode() {
 	cout << "Song Length (in seconds): " << this->songLength << endl; 
 }
 
-    SetNext();
-    GetID();
-    GetSongName();
-    GetArtistName();
-    GetSongLength();
-    
+void PlaylistNode::SetNext(PlaylistNode* set) {
+   this->nextNodePtr = set;
+}
+
+// accessors
+PlaylistNode* PlaylistNode::GetNext() {
+   return this->nextNodePtr;
+}
+
+string PlaylistNode::GetID() const{
+   return uniqueID;
+}
+
+string PlaylistNode::GetSongName() const{
+   return songName;
+}
+
+string PlaylistNode::GetArtistName() const{
+   return artistName;
+}
+
+int PlaylistNode::GetSongLength() const{
+   return songLength;
+}
     
