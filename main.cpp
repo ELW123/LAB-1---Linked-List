@@ -21,7 +21,7 @@ void printMenu(PlaylistNode& playlist, string name) {
 	string playlistUniqueID;
 	string playlistName;
 	string playlistArtistName;
-	string playlistSongLength;
+	int playlistSongLength;
 	
 	string removedID;
 
@@ -56,9 +56,10 @@ void printMenu(PlaylistNode& playlist, string name) {
 			cin >> playlistSongLength;
 			cout << playlistSongLength << endl;
 
-			// create new playlistNode and use insertAfter function
-			
-			printMenuChoices();
+			// create new playlistNode and use insertAfter function (double check!)
+			PlaylistNode* addition = new PlaylistNode(playlistUniqueID, playlistName, playlistArtistName, playlistSongLength);
+			playlist.InsertAfter(addition);
+			printMenuChoices(name);
 			continue;
 		}
 
@@ -71,7 +72,7 @@ void printMenu(PlaylistNode& playlist, string name) {
             cin.ignore(1);
             getline(std::cin, removedID);
 
-			printMenuChoices();
+			printMenuChoices(name);
 			continue;
 		}
 
@@ -80,7 +81,7 @@ void printMenu(PlaylistNode& playlist, string name) {
 			cout << endl << name << "- OUTPUT FULL PLAYLIST" << endl;
 			playlist.PrintPlaylistNode();
 
-			printMenuChoices();
+			printMenuChoices(name);
 			continue;
 		}
 	}
