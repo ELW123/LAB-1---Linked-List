@@ -10,7 +10,7 @@ void printMenuChoices(string name) {
       << "c - Change position of song" << endl
       << "s - Output songs by specific artist" << endl
       << "t - Output total time of playlist (in seconds)" << endl
-	  << "o - Output full playlist" << endl
+      << "o - Output full playlist" << endl
       << "q - Quit" << endl
       << endl;
 }
@@ -38,7 +38,7 @@ void printMenu(string name) {
 
     	if (userInput == "q") break;
 
-		if (userInput != "a" && userInput != "d" && userInput != "c" && userInput != "i" && userInput != "o") {
+		if (userInput != "a" && userInput != "d" && userInput != "c" && userInput != "t" && userInput != "o") {
 			continue;
 		}
 		
