@@ -55,6 +55,10 @@ void printMenu(PlaylistNode& playlist, string name) {
 			cout << "Enter song's length (in seconds) : " << endl;
 			cin >> playlistSongLength;
 			cout << playlistSongLength << endl;
+
+			// create new playlistNode and use insertAfter function
+			
+			printMenuChoices();
 			continue;
 		}
 
@@ -66,6 +70,8 @@ void printMenu(PlaylistNode& playlist, string name) {
 			cin.clear();
             cin.ignore(1);
             getline(std::cin, removedID);
+
+			printMenuChoices();
 			continue;
 		}
 
@@ -73,6 +79,8 @@ void printMenu(PlaylistNode& playlist, string name) {
 		if (userInput == "o") {
 			cout << endl << name << "- OUTPUT FULL PLAYLIST" << endl;
 			playlist.PrintPlaylistNode();
+
+			printMenuChoices();
 			continue;
 		}
 	}
