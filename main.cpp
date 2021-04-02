@@ -22,12 +22,18 @@ void printMenu(string name) {
 	string playlistName;
 	string playlistArtistName;
 	int playlistSongLength;
-	int positionOld;
-	int positionNew;
+	int posOld;
+	int posNew;
 	string removedID;
+	int num = 1;
+	int totalTime = 0;
 
-	PlaylistNode* playlist = new PlaylistNode;
+	PlaylistNode* playlist = new PlaylistNode();
 	playlist = nullptr;
+	PlaylistNode* currObj = new PlaylistNode();
+	currObj = nullptr;
+
+	Playlist pList;
 
 	printMenuChoices(name);
 
@@ -44,39 +50,43 @@ void printMenu(string name) {
         
 		if (userInput == "a") {
 			cout << endl << "ADD SONG" << endl
-				 << "Enter song's unique ID: " << endl;
+				 << "Enter song's unique ID:" << endl;
 			cin.clear();
         	cin.ignore(1);
         	getline(std::cin, playlistUniqueID);
-			cout << playlistUniqueID << endl;
 
-			cout << "Enter song's name: " << endl;
+			cout << "Enter song's name:" << endl;
 			getline(std::cin, playlistName);
-			cout << playlistName << endl;
 
-			cout << "Enter artist's name: " << endl;
+			cout << "Enter artist's name:" << endl;
 			getline(std::cin, playlistArtistName);
-			cout << playlistArtistName << endl;
 
-			cout << "Enter song's length (in seconds) : " << endl;
+			cout << "Enter song's length (in seconds):" << endl << endl;
 			cin >> playlistSongLength;
-			cout << playlistSongLength << endl;
 
-			// double check here!
-			PlaylistNode* addition = new PlaylistNode(playlistUniqueID, playlistName, playlistArtistName, playlistSongLength);
-			playlist->InsertAfter(addition);
+			pList.AddSong(playlistUniqueID, playlistName, playlistArtistName, playlistSongLength);
+
 			printMenuChoices(name);
 			continue;
 		}
 
-		// need to implement how to remove
 		if (userInput == "d") {
 			cout << "REMOVE SONG" << endl 
-                 << "Enter song's unique ID: " << endl;
+                 << "Enter song's unique ID:" << endl;
 			
 			cin.clear();
             cin.ignore(1);
             getline(std::cin, removedID);
+
+			pList.RemoveSong(removedID);
+			/*
+			currObj = playlist;
+			while (currObj != nullptr) {
+				if (currObj->GetID() == playlistUniqueID)
+      				currObj = nullptr; // this part should be checked
+
+      			currObj = currObj->GetNext();
+   			} */
 
 			printMenuChoices(name);
 			continue;
@@ -88,12 +98,12 @@ void printMenu(string name) {
 
 			cin.clear();
             cin.ignore(1);
-			cin >> positionOld;
-			cout << positionOld << endl;
+			cin >> posOld;
+			cout << posOld << endl;
 
 			cout << "Enter new position for song: " << endl;
-			cin >> positionNew;
-			cout << positionNew << endl;
+			cin >> posNew;
+			cout << posNew << endl;
 
 			// do some change position stuff here later
 		}
@@ -107,10 +117,13 @@ void printMenu(string name) {
 			getline(std::cin, playlistArtistName);
 			cout << playlistArtistName;
 
-			PlaylistNode* currObj = playlist;
+			currObj = playlist;
 			while (currObj != nullptr) {
-				if (currObj->GetArtistName() == playlistArtistName)
-      				currObj->PrintPlaylistNode();
+				if (currObj->GetArtistName() == playlistArtistName) {
+      				cout << num << "." << endl;
+					currObj->PrintPlaylistNode();
+					num++;
+				}
 
       			currObj = currObj->GetNext();
    			}
@@ -121,12 +134,9 @@ void printMenu(string name) {
 
 		// need to implement printing the other nodes and situation where playlist is empty
 		if (userInput == "o") {
-			cout << endl << name << "- OUTPUT FULL PLAYLIST" << endl;
+			cout << name << " - OUTPUT FULL PLAYLIST" << endl;
 			
-			if (playlist != nullptr) 
-				playlist->PrintPlaylistNode();
-			else
-				cout << "Playlist is empty" << endl << endl;
+			pList.PrintList();
 
 			printMenuChoices(name);
 			continue;
