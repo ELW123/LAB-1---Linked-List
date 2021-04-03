@@ -117,6 +117,8 @@ void printMenu(string name) {
 			getline(std::cin, playlistArtistName);
 			cout << playlistArtistName;
 
+			// uses songsbyartist function
+			/*
 			currObj = playlist;
 			while (currObj != nullptr) {
 				if (currObj->GetArtistName() == playlistArtistName) {
@@ -127,12 +129,17 @@ void printMenu(string name) {
 
       			currObj = currObj->GetNext();
    			}
-			
+			*/
 			printMenuChoices(name);
 			continue;
 		}
 
-		// need to implement printing the other nodes and situation where playlist is empty
+		// to do, uses totaltime function
+		if (userInput == "t") {
+
+
+		}
+		
 		if (userInput == "o") {
 			cout << name << " - OUTPUT FULL PLAYLIST" << endl;
 			

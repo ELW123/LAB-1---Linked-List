@@ -32,8 +32,8 @@ class Playlist {
     void RemoveSong(string id);
     void PrintList();
     void ChangePosition(int posO, int posN);
-    //void SongsByArtist(string artist);
-    //int TotalTime();
+    void SongsByArtist(string artist);
+    int TotalTime();
 
  private:
    PlaylistNode *head;
