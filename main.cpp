@@ -109,13 +109,15 @@ void printMenu(string name) {
 		}
 
 		if (userInput == "s") {
-			cout << "OUTPUT SONGS BY SPECIFIC ARTIST" << endl 
-                 << "Enter artist's name: " << endl;
-
+			
+	       		cout << "OUTPUT SONGS BY SPECIFIC ARTIST" << endl; 
+             		cout << "Enter artist's name: " << endl;
 			cin.clear();
-            cin.ignore(1);
+            		cin.ignore(1);
 			getline(std::cin, playlistArtistName);
 			cout << playlistArtistName;
+			pList.SongsByArtist(playlistArtistName);
+
 
 			// uses songsbyartist function
 			/*
@@ -136,6 +138,17 @@ void printMenu(string name) {
 
 		// to do, uses totaltime function
 		if (userInput == "t") {
+			
+			cout << "OUTPUT TOTAL TIME OF PLAYLIST (IN SECONDS)" << endl;
+			cin.clear();
+			cin.ignore(1);
+			cout << "Total time: " << pList.TotalTime() << " seconds";
+			
+			printMenuChoices(name);
+			continue;
+
+
+		}
 
 
 		}
