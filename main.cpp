@@ -16,7 +16,6 @@ void printMenuChoices(string name) {
 }
 
 void printMenu(string name) {
-	// variables here to show user input and all other necessary changes (to be filled in further)
 	string userInput;
 	string playlistUniqueID;
 	string playlistName;
@@ -25,13 +24,6 @@ void printMenu(string name) {
 	int posOld;
 	int posNew;
 	string removedID;
-	int num = 1;
-	int totalTime = 0;
-
-	PlaylistNode* playlist = new PlaylistNode();
-	playlist = nullptr;
-	PlaylistNode* currObj = new PlaylistNode();
-	currObj = nullptr;
 
 	Playlist pList;
 
@@ -79,38 +71,30 @@ void printMenu(string name) {
             getline(std::cin, removedID);
 
 			pList.RemoveSong(removedID);
-			/*
-			currObj = playlist;
-			while (currObj != nullptr) {
-				if (currObj->GetID() == playlistUniqueID)
-      				currObj = nullptr; // this part should be checked
-
-      			currObj = currObj->GetNext();
-   			} */
-
+			
 			printMenuChoices(name);
 			continue;
 		}
 
 		if (userInput == "c") {
 			cout << "CHANGE POSITION OF SONG" << endl 
-                 << "Enter song's current position: " << endl;
+                 << "Enter song's current position:" << endl;
 
 			cin.clear();
             cin.ignore(1);
 			cin >> posOld;
-			cout << posOld << endl;
-
-			cout << "Enter new position for song: " << endl;
+			
+			cout << "Enter new position for song:" << endl;
 			cin >> posNew;
-			cout << posNew << endl;
+			
+			pList.ChangePosition(posOld, posNew);
 
-			// do some change position stuff here later
+			printMenuChoices(name);
+			continue;
 		}
 
 		if (userInput == "s") {
-			
-	       		cout << "OUTPUT SONGS BY SPECIFIC ARTIST" << endl; 
+			cout << "OUTPUT SONGS BY SPECIFIC ARTIST" << endl; 
              		cout << "Enter artist's name: " << endl;
 			cin.clear();
             		cin.ignore(1);
@@ -118,27 +102,11 @@ void printMenu(string name) {
 			cout << playlistArtistName;
 			pList.SongsByArtist(playlistArtistName);
 
-
-			// uses songsbyartist function
-			/*
-			currObj = playlist;
-			while (currObj != nullptr) {
-				if (currObj->GetArtistName() == playlistArtistName) {
-      				cout << num << "." << endl;
-					currObj->PrintPlaylistNode();
-					num++;
-				}
-
-      			currObj = currObj->GetNext();
-   			}
-			*/
 			printMenuChoices(name);
 			continue;
 		}
 
-		// to do, uses totaltime function
 		if (userInput == "t") {
-			
 			cout << "OUTPUT TOTAL TIME OF PLAYLIST (IN SECONDS)" << endl;
 			cin.clear();
 			cin.ignore(1);
@@ -146,10 +114,7 @@ void printMenu(string name) {
 			
 			printMenuChoices(name);
 			continue;
-
-
 		}
-
 		
 		if (userInput == "o") {
 			cout << name << " - OUTPUT FULL PLAYLIST" << endl;

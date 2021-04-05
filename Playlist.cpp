@@ -19,7 +19,6 @@ PlaylistNode::PlaylistNode(string ID, string song, string artist, int slength){
 	this->artistName = artist;
 	this->songLength = slength;
 	this->nextNodePtr = nullptr; 
-	
 }
 
 void PlaylistNode::InsertAfter(PlaylistNode* nodeLoc) {
@@ -63,40 +62,33 @@ int PlaylistNode::GetSongLength() const{
 
 // playlist class stuff
 Playlist::Playlist() {
-	head = nullptr;
-	next = nullptr;
+	// add two empty elements as sentinels head to make things easier
+	head = new PlaylistNode();
+	head->SetNext(nullptr);
+	tail = head;
+}
+
+// destructor
+Playlist::~Playlist() {
+        PlaylistNode* iter = head;
+
+        while (iter != nullptr) {
+                PlaylistNode* tmp = iter;
+                iter = iter->GetNext();
+                delete tmp;
+        }
 }
 
 void Playlist::AddSong(string idP, string songNameP, string artistNameP, int lengthP) {
 	PlaylistNode* addition = new PlaylistNode(idP, songNameP, artistNameP, lengthP);
 	
-	if (head == nullptr) {
-		head = addition;
-		next = addition;
-	} else { // this part is the main problematic part! It should be fixed for now
-		next->InsertAfter(addition);
-		next = addition;
-	}
-
-	/*
-	if (head == nullptr)
-		head = addition;
-
-	else if (head != nullptr && next == nullptr)
-		next = addition;
-	else
-		next->InsertAfter(addition);
-		*/
+	tail->SetNext(addition);
+	tail = addition;
 }
 
 void Playlist::RemoveSong(string idP) {
-	if (head == nullptr) {
-		cout << "Playlist is empty" << endl;
-		return;
-	}
-
-	PlaylistNode* curr = head;
-	PlaylistNode* prev = nullptr;
+	PlaylistNode* prev = head;
+	PlaylistNode* curr = prev->GetNext();
    	while (curr != nullptr) {
        if (curr->GetID() == idP)       
            break;
@@ -105,27 +97,84 @@ void Playlist::RemoveSong(string idP) {
        curr = curr->GetNext();
    	}
 	
-    if (prev != nullptr)
+    if (curr != nullptr) {
         prev->SetNext(curr->GetNext());
-	else
-        head = curr->GetNext();
-
-    if (next == curr)
-           next = prev;
-    
+	delete curr;
 	cout << "\"" << curr->GetSongName() << "\"" << " removed." << endl << endl;
-    delete curr;
+    }
 }
 
 void Playlist::ChangePosition(int posO, int posN) {
+	// basic checks
+	if (head == nullptr) return;
+	if (posO == posN) return;
+	if (posO < 1) {
+		cout << "\" invalid old position.\n"; // not in zybooks test harness - personal use
+		return;
+	}
 
+	// find the old position
+	PlaylistNode* preCurrOld = head;
+	int index = 0;
+	while (preCurrOld != nullptr) {
+		index++;
+		if (index == posO) break; //found	
+		preCurrOld = preCurrOld->GetNext();
+	}
+	if (index != posO) {
+		cout << "\" invalid old position.\n";
+		return;
+	}
+	// now perCurrOld is pointing to the element just before the old position
+	
+	if (posN <= 1) { // move curr to the head
+		PlaylistNode* curr = preCurrOld->GetNext();
+		preCurrOld->SetNext(curr->GetNext());
+		// update next if necessary
+		if (preCurrOld->GetNext() == nullptr) tail =preCurrOld;
+		curr->SetNext(head->GetNext());
+		head->SetNext(curr);
+		return;
+	}
+
+	// find the new position
+	if (posO <= posN) ++posN;
+
+	PlaylistNode* preCurrNew = head;
+	index = 0;
+	while (preCurrNew != nullptr) {
+		index++;
+		if (index == posN) break; //found	
+		preCurrNew = preCurrNew->GetNext();
+	}	
+	if (index != posN) { // move curr to the end of the list
+		PlaylistNode* curr = preCurrOld->GetNext();
+		preCurrOld->SetNext(curr->GetNext());
+		curr->SetNext(nullptr);
+		tail->SetNext(curr);
+		tail=curr;
+		return;
+	}
+	// now move to the new position
+	{
+		PlaylistNode* curr = preCurrOld->GetNext();
+		preCurrOld->SetNext(curr->GetNext());
+		// update next if necessary
+		if (preCurrOld->GetNext() == nullptr) tail=preCurrOld;
+		curr->SetNext(preCurrNew->GetNext());
+		preCurrNew->SetNext(curr);
+
+		cout << "\"" << curr->GetSongName() << "\"" << " moved to position " << posN - 1 << endl << endl;
+
+		return;
+	}
 }
 
 void Playlist::PrintList() {
-	PlaylistNode* display = head;
+	PlaylistNode* display = head->GetNext();
 	int i = 1;
 
-	if (head == nullptr) {
+	if (display == nullptr) {
 		cout << "Playlist is empty" << endl << endl;
 		return;
 	}
@@ -136,7 +185,7 @@ void Playlist::PrintList() {
 	}
 }
 
-void Playlist :: SongsByArtist(string artist){
+void Playlist::SongsByArtist(string artist){
  	int x = 1;
 	PlaylistNode* c = head;
 			while (c != 0) {
@@ -149,7 +198,7 @@ void Playlist :: SongsByArtist(string artist){
    			}
 } 
 
-int Playlist :: TotalTime() {
+int Playlist::TotalTime() {
 	int total = 0;
 	PlaylistNode* currentN = head;
 		while(currentN != 0){
@@ -158,5 +207,3 @@ int Playlist :: TotalTime() {
 	}
 	return total; 
 }
-
-    

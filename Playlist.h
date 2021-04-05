@@ -28,6 +28,7 @@ class PlaylistNode {
 class Playlist {
  public:
     Playlist();
+    ~Playlist(); // destructor
     void AddSong(string ID, string songName, string artistName, int length);
     void RemoveSong(string id);
     void PrintList();
@@ -37,7 +38,7 @@ class Playlist {
 
  private:
    PlaylistNode *head;
-   PlaylistNode *next;
+   PlaylistNode *tail; // this is the LAST node in the ENTIRE list, not the actual next; that is in the playlistNode!
 };
 
 #endif
