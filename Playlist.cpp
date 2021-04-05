@@ -136,47 +136,27 @@ void Playlist::PrintList() {
 	}
 }
 
-// I think (not confirmed) this should be in main.cpp based on some prior experience
-/*
-void PlaylistNode :: PrintMenu(string t){
-	
-	char c; 
-	cout << t << " PLAYLIST MENU" << endl;
-	cout << "a - Add song" << endl;
-	cout << "d - Remove song" << endl;
-	cout << "c - Change position of song" << endl;
-	cout << "s - Output songs by specific artist" << endl;
-	cout << "t - Output total time of playlist (in seconds)" << endl;
-	cout << "o - Output full playlist" << endl;
-	cout << "q - Quit" << endl;
-	cout << endl;
-	cout << "Choose an option:" << endl;
-	cin >> c;
-	
-	while ( c!="a" || c!="d" || c!="c" || c!="s" || c!="t" || c!="o" || c!="q" ){
-		cout << "Choose an option:" << endl;
-		cin >> c;
+void Playlist :: SongsByArtist(string artist){
+ 	int x = 1;
+	PlaylistNode* c = head;
+			while (c != 0) {
+				if (c->GetArtistName() == artist) {
+      				cout << x << "." << endl;
+					c->PrintPlaylistNode();
+					x++;
+				}
+      			c = c->GetNext();
+   			}
+} 
+
+int Playlist :: TotalTime() {
+	int total = 0;
+	PlaylistNode* currentN = head;
+		while(currentN != 0){
+			total = total + currentN->GetSongLength();
+			currentN = currentN->GetNext();
 	}
-	
-	if ( c == "q"){
-		break;
-	}
-	while ( c != "q"){
-		if ( c == "a")
-		AddSong();
-		else if ( c == "d")
-		RemoveSong();
-		else if ( c == "c")
-		****
-		else if ( c == "s")
-		****
-		else if (c == "t")
-		***
-		else if (c == "o")
-		****
-		
-	}
-	
+	return total; 
 }
-*/
+
     
