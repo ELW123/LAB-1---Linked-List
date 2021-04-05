@@ -1,3 +1,12 @@
+/* 	Collaborated with: 
+	Ethan Wan, 
+	Ethan Wan's prior HW assignments in CS 10B, 
+	Mariam Golwalla, 
+	Yugarshi Shashwat, 
+	zybooks.com - CS 10C and CS 10B, 
+	github.com to host our code
+*/
+
 #include <iostream>
 
 using namespace std;
@@ -109,7 +118,7 @@ void Playlist::ChangePosition(int posO, int posN) {
 	if (head == nullptr) return;
 	if (posO == posN) return;
 	if (posO < 1) {
-		cout << "\" invalid old position.\n"; // not in zybooks test harness - personal use
+		cout << "invalid old position."; // not in zybooks test harness - personal use
 		return;
 	}
 
@@ -118,11 +127,15 @@ void Playlist::ChangePosition(int posO, int posN) {
 	int index = 0;
 	while (preCurrOld != nullptr) {
 		index++;
-		if (index == posO) break; //found	
+
+		if (index == posO) 
+			break; //found	
+
 		preCurrOld = preCurrOld->GetNext();
 	}
+
 	if (index != posO) {
-		cout << "\" invalid old position.\n";
+		cout << "invalid old position.";
 		return;
 	}
 	// now perCurrOld is pointing to the element just before the old position
@@ -131,20 +144,27 @@ void Playlist::ChangePosition(int posO, int posN) {
 		PlaylistNode* curr = preCurrOld->GetNext();
 		preCurrOld->SetNext(curr->GetNext());
 		// update next if necessary
-		if (preCurrOld->GetNext() == nullptr) tail =preCurrOld;
+
+		if (preCurrOld->GetNext() == nullptr) 
+			tail =preCurrOld;
+
 		curr->SetNext(head->GetNext());
 		head->SetNext(curr);
 		return;
 	}
 
 	// find the new position
-	if (posO <= posN) ++posN;
+	if (posO <= posN) 
+		++posN;
 
 	PlaylistNode* preCurrNew = head;
 	index = 0;
+	
 	while (preCurrNew != nullptr) {
 		index++;
-		if (index == posN) break; //found	
+
+		if (index == posN) 
+			break; //found	
 		preCurrNew = preCurrNew->GetNext();
 	}	
 	if (index != posN) { // move curr to the end of the list
@@ -160,7 +180,10 @@ void Playlist::ChangePosition(int posO, int posN) {
 		PlaylistNode* curr = preCurrOld->GetNext();
 		preCurrOld->SetNext(curr->GetNext());
 		// update next if necessary
-		if (preCurrOld->GetNext() == nullptr) tail=preCurrOld;
+		
+		if (preCurrOld->GetNext() == nullptr) 
+			tail=preCurrOld;
+		
 		curr->SetNext(preCurrNew->GetNext());
 		preCurrNew->SetNext(curr);
 

@@ -1,3 +1,12 @@
+/* 	Collaborated with: 
+	Ethan Wan, 
+	Ethan Wan's prior HW assignments in CS 10B, 
+	Mariam Golwalla, 
+	Yugarshi Shashwat, 
+	zybooks.com - CS 10C and CS 10B, 
+	github.com to host our code
+*/
+
 #include "Playlist.h"
 
 #include <iostream>
