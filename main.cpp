@@ -150,8 +150,6 @@ void printMenu(string name) {
 
 		}
 
-
-		}
 		
 		if (userInput == "o") {
 			cout << name << " - OUTPUT FULL PLAYLIST" << endl;
