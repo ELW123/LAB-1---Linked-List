@@ -209,15 +209,16 @@ void Playlist::OutputList() {
 }
 
 void Playlist::SongsByArtist(string artist){
- 	int x = 1;
+ 	int x = 0;
 	PlaylistNode* c = head;
 			while (c != 0) {
 				if (c->GetArtistName() == artist) {
       				cout << x << "." << endl;
 					c->PrintPlaylistNode();
-					x++;
+					
 				}
       			c = c->GetNext();
+      			x++;
    			}
 } 
 
