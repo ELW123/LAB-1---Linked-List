@@ -193,7 +193,7 @@ void Playlist::ChangePosition(int posO, int posN) {
 	}
 }
 
-void Playlist::PrintList() {
+void Playlist::OutputList() {
 	PlaylistNode* display = head->GetNext();
 	int i = 1;
 

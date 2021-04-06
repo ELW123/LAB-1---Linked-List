@@ -45,7 +45,7 @@ void printMenu(string name) {
 
     	if (userInput == "q") break;
 
-		if (userInput != "a" && userInput != "d" && userInput != "c" && userInput != "i" && userInput != "o") {
+		if (userInput != "a" && userInput != "d" && userInput != "c" && userInput != "s" && userInput != "t" && userInput != "o") {
 			continue;
 		}
         
@@ -104,11 +104,10 @@ void printMenu(string name) {
 
 		if (userInput == "s") {
 			cout << "OUTPUT SONGS BY SPECIFIC ARTIST" << endl; 
-             		cout << "Enter artist's name: " << endl;
+             		cout << "Enter artist's name:" << endl << endl;
 			cin.clear();
             		cin.ignore(1);
 			getline(std::cin, playlistArtistName);
-			cout << playlistArtistName;
 			pList.SongsByArtist(playlistArtistName);
 
 			printMenuChoices(name);
@@ -119,7 +118,7 @@ void printMenu(string name) {
 			cout << "OUTPUT TOTAL TIME OF PLAYLIST (IN SECONDS)" << endl;
 			cin.clear();
 			cin.ignore(1);
-			cout << "Total time: " << pList.TotalTime() << " seconds";
+			cout << "Total time: " << pList.TotalTime() << " seconds" << endl << endl;
 			
 			printMenuChoices(name);
 			continue;
@@ -128,7 +127,7 @@ void printMenu(string name) {
 		if (userInput == "o") {
 			cout << name << " - OUTPUT FULL PLAYLIST" << endl;
 			
-			pList.PrintList();
+			pList.OutputList();
 
 			printMenuChoices(name);
 			continue;

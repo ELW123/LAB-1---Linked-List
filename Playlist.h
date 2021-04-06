@@ -40,7 +40,7 @@ class Playlist {
     ~Playlist(); // destructor
     void AddSong(string ID, string songName, string artistName, int length);
     void RemoveSong(string id);
-    void PrintList();
+    void OutputList();
     void ChangePosition(int posO, int posN);
     void SongsByArtist(string artist);
     int TotalTime();
